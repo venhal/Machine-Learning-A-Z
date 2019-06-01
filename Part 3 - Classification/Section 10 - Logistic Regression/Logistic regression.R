@@ -14,3 +14,28 @@ testing_set = subset(dataset, split == FALSE)
 #feature scaling
 training_set[, 1:2] = scale(training_set[, 1:2])
 testing_set[, 1:2] = scale(testing_set[, 1:2])
+
+#fitting logistic regression to the training set
+classifier = glm(formula = Purchased ~., 
+                 family = binomial, 
+                 data = training_set)
+
+#predicting the test set result
+prob_pred = predict(classifier, type = 'response', newdata = testing_set[-3])
+y_pred = ifelse(prob_pred > 0.5, 1, 0)
+
+#making the confusion Matrix
+cm = table(testing_set[ , 3], y_pred)
+
+#visualising the training set result
+
+
+
+
+
+
+
+
+
+
+
